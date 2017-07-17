@@ -1,4 +1,4 @@
-local pgmoon = require "pgmoon-mashape"
+local pgmoon = require "pgmoon"
 local Errors = require "kong.dao.errors"
 local utils = require "kong.tools.utils"
 local cjson = require "cjson"
@@ -45,7 +45,7 @@ function _M.new(kong_config)
     database = kong_config.pg_database,
     ssl = kong_config.pg_ssl,
     ssl_verify = kong_config.pg_ssl_verify,
-    cafile = kong_config.lua_ssl_trusted_certificate
+    cafile = kong_config.lua_ssl_trusted_certificate,
   }
 
   return self
