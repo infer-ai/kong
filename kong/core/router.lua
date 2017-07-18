@@ -152,7 +152,7 @@ local function marshall_api(api)
       api_t.match_rules = bor(api_t.match_rules, MATCH_RULES.URI)
 
       for _, uri in ipairs(api.uris) do
-        if re_match(uri, [[^[a-zA-Z0-9\.\-_~/%]*$]]) then
+        if re_find(uri, [[^[a-zA-Z0-9\.\-_~/%]*$]]) then
           -- plain URI or URI prefix
           local escaped_uri = [[\Q]] .. uri .. [[\E]]
           local strip_regex = escaped_uri .. [[/?(?P<stripped_uri>.*)]]
