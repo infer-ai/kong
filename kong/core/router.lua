@@ -650,13 +650,7 @@ function _M.new(apis)
 
     else
       for i = 1, #uris_prefixes do
-        local from, _, err = re_find(req_uri, uris_prefixes[i].regex, "ajo")
-        if err then
-          log(ERR, "could not evaluate URI prefix: ", err)
-          return
-        end
-
-        if from then
+        if find(req_uri, uris_prefixes[i].value, nil, true) == 1 then
           hits.uri     = uris_prefixes[i].value
           req_category = bor(req_category, MATCH_RULES.URI)
           break
