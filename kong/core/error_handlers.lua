@@ -1,4 +1,5 @@
 local singletons = require "kong.singletons"
+local error_messages = require "kong.error_messages"
 
 local find = string.find
 local format = string.format
@@ -53,7 +54,7 @@ return function(ngx)
   end
 
   local status = ngx.status
-  message = BODIES["s" .. status] and BODIES["s" .. status] or format(BODIES.default, status)
+  message = error_messages["s" .. status] and error_messages["s" .. status] or format(error_messages.default, status)
 
   if singletons.configuration.server_tokens then
     ngx.header["Server"] = SERVER_HEADER

@@ -1,0 +1,20 @@
+return {
+    s400 = "Bad request, Infrrd",
+    s401 = "Unauthorized, Infrrd",
+    S403 = "Forbidden, Infrrd",
+	  s404 = "Not found, Infrrd",
+    s405 = "Method is not allowed, Infrrd",
+  	s408 = "Request timeout, Infrrd",
+    s409 = "HTTP Conflict, Infrrd",
+  	s411 = "Length required,  Infrrd",
+  	s412 = "Precondition failed, Infrrd",
+  	s413 = "Payload too large, Infrrd",
+  	s414 = "URI too long, Infrrd",
+    s415 = "Unsupported Media Type, Infrrd",
+  	s417 = "Expectation failed, Infrrd",
+  	s500 = "An unexpected error occurred, Infrrd",
+  	s502 = "An invalid response was received from the upstream server, Infrrd",
+  	s503 = "The upstream server is currently unavailable, Infrrd",
+  	s504 = "The upstream server is timing out, Infrrd",
+  	default = "The upstream server responded with %d, Infrrd"
+}

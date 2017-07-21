@@ -147,8 +147,11 @@ server {
 
     location = /kong_error_handler {
         internal;
+        header_filter_by_lua_block{
+            require('kong.core.custom_error_handlers').headers(ngx)
+        }
         content_by_lua_block {
-            require('kong.core.error_handlers')(ngx)
+            require('kong.core.custom_error_handlers').body(ngx)
         }
     }
 }
