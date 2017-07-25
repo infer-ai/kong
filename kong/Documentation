@@ -1,0 +1,24 @@
+1.	New file has been created in kong->core->custom_error_handlers.lua
+	It handles the error which occurs at Nginx.
+	Any error which occurs at Upstream Server will be directly propagated to client.
+
+	In custom_error_handler.lua:
+	1. We can set the message template.
+	2. All the error messages based on response status code which is need to be passed to client is set in kong->error_messages.lua
+
+2.	Some of the error messages are also sent by various plugins in Kong.
+	We have use plugins like
+	1. kong->plugins->key-auth
+	2. kong->plugins->acl
+
+	All the business processing is done in handler.lua file of each plugin.
+
+	Error messages of above said plugins also have been mapped in error_messages.lua file.
+
+	If any more changes are required to be done in plugins. Following are the steps:
+	1.	Add local error_messages = require "kong.error_messages" at the top of the file (handler.lua)
+	2.	Add error message to be sent in error_message.lua file in "key = value" format.
+	3.	Map the error message at the desired place in plugin using error_messages["key"].
+
+	Note: All the plugins uses kong->tools->responses.lua file to send their response to client. If any changes like template changes has to be made, it should be made in above said file.
+
