@@ -4,6 +4,7 @@ local cache = require "kong.tools.database_cache"
 local responses = require "kong.tools.responses"
 local utils = require "kong.tools.utils"
 local constants = require "kong.constants"
+local error_messages =  require "kong.error_messages"
 
 local table_insert = table.insert
 local table_concat = table.concat
@@ -75,7 +76,7 @@ function ACLHandler:access(conf)
   end
 
   if block then
-    return responses.send_HTTP_FORBIDDEN("You cannot consume this service")
+    return responses.send_HTTP_FORBIDDEN(error_messages["noPermission"])
   end
 
   -- Prepare header

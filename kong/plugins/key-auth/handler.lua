@@ -4,6 +4,7 @@ local constants = require "kong.constants"
 local singletons = require "kong.singletons"
 local public_tools = require "kong.tools.public"
 local BasePlugin = require "kong.plugins.base_plugin"
+local error_messages = require "kong.error_messages"
 
 local ngx_set_header = ngx.req.set_header
 local ngx_get_headers = ngx.req.get_headers
@@ -114,7 +115,7 @@ local function do_authentication(conf)
   -- this request is missing an API key, HTTP 401
   if not key then
     ngx.header["WWW-Authenticate"] = _realm
-    return false, { status = 401, message = "No API key found in request" }
+    return false, { status = 401, message = error_messages["noApiKey"] }
   end
 
   -- retrieve our consumer linked to this API key
@@ -126,7 +127,7 @@ local function do_authentication(conf)
 
   -- no credential in DB, for this key, it is invalid, HTTP 403
   if not credential then
-    return false, {status = 403, message = "Invalid authentication credentials"}
+    return false, {status = 403, message = error_messages["invalidAuth"]}
   end
 
   -----------------------------------------

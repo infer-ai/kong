@@ -1,3 +1,5 @@
+local error_messages = require "kong.error_messages"
+
 local find = string.find
 local format = string.format
 
@@ -111,7 +113,7 @@ function _M.body(ngx)
   local template, _ = parse_accept_header(ngx)
   local status = transform_custom_status_codes(ngx.status)
 
-  message = BODIES["s"..status] and BODIES["s"..status] or format(BODIES.default, status)
+  message = error_messages["s"..status] and error_messages["s"..status] or format(error_messages.default, status)
   ngx.say(format(template, message))
 end
 
